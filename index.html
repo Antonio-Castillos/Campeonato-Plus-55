@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campeonato Plus 55</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="img/balon.webp">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header class="encabezado-principal"> 
+    <img src="img/logo.png" alt="Logo Plus 55" style="max-height: 100px; margin-bottom: 0.5rem;" />
+  </header>
+  <!-- Menú -->
+  <nav>
+    <a onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a onclick="mostrarSeccion('tabla')">Tabla de Posiciones</a>
+    <a onclick="mostrarSeccion('reglamento')">Reglamento</a>
+    <a onclick="mostrarSeccion('contacto')">Contacto</a>
+  </nav>
+  <!-- Sección: Inicio -->
+  <section id="inicio" class="contenido">
+    <section class="bienvenida">
+      <h2>Bienvenidos al Campeonato Plus 55</h2>
+      <p>El espacio oficial para seguir toda la información del campeonato de fútbol para veteranos mayores de 55 años.</p>
+    </section>
+
+    <section class="avisos">
+      <h3>📢 Avisos Recientes</h3>
+      <ul>
+        <li><strong>28/07/2025:</strong> Cambio de horario en el partido entre Águilas vs Titanes (4:00 p.m.).</li>
+        <li><strong>27/07/2025:</strong> Reunión de delegados el jueves 31 a las 6:30 p.m.</li>
+      </ul>
+    </section>
+
+    <section class="programacion">
+      <h3>📅 Próximos Partidos</h3>
+      <table>
+        <tr><th>Fecha</th><th>Hora</th><th>Partido</th><th>Cancha</th></tr>
+        <tr><td>01/08/2025</td><td>3:00 p.m.</td><td>Lobos vs Jaguares</td><td>Cancha 1</td></tr>
+        <tr><td>01/08/2025</td><td>5:00 p.m.</td><td>Águilas vs Titanes</td><td>Cancha 2</td></tr>
+      </table>
+    </section>
+  </section>
+  <!-- Sección: Tabla de posiciones -->
+  <section id="tabla" class="contenido oculto">
+    <h2>🏆 Tabla de Posiciones</h2>
+
+    <table id="tablaPosiciones">
+      <thead>
+        <tr>
+          <th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th>
+          <th>GF</th><th>GC</th><th>DG</th><th>Pts</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <form id="formulario">
+      <h3>Ingresar Resultado</h3>
+      <input type="text" id="equipo1" placeholder="Equipo 1" required />
+      <input type="number" id="goles1" placeholder="Goles 1" required />
+      <input type="text" id="equipo2" placeholder="Equipo 2" required />
+      <input type="number" id="goles2" placeholder="Goles 2" required />
+      <button type="submit">Actualizar</button>
+    </form>
+  </section>
+<!-- Sección: Reglamentacion -->
+<section id="reglamento" class="contenido oculto">
+  <h2>📘 Reglamento del Campeonato Plus 55</h2>
+  <p>A continuación se detallan las normas que rigen el desarrollo del torneo:</p>
+
+  <ol>
+    <li><strong>Edad mínima:</strong> Todos los jugadores deben tener 55 años cumplidos o más al inicio del torneo.</li>
+    <li><strong>Duración de los partidos:</strong> 2 tiempos de 30 minutos con descanso de 10 minutos.</li>
+    <li><strong>Cambios ilimitados:</strong> Permitidos en cualquier momento, con autorización del árbitro.</li>
+    <li><strong>Uniforme:</strong> Todos los equipos deben presentarse uniformados con camiseta numerada.</li>
+    <li><strong>Sanciones:</strong> Dos tarjetas amarillas equivalen a una roja. Una tarjeta roja implica suspensión automática por el siguiente partido.</li>
+    <li><strong>Inscripción:</strong> Cada equipo debe entregar planilla con mínimo 12 y máximo 20 jugadores.</li>
+    <li><strong>Puntaje:</strong> Victoria (3 pts), Empate (1 pt), Derrota (0 pts).</li>
+    <li><strong>Desempates:</strong> Se definen por: Diferencia de gol → Goles a favor → Resultado entre equipos → Sorteo.</li>
+    <li><strong>Conducta:</strong> Actitudes violentas o antideportivas serán sancionadas con expulsión definitiva.</li>
+    <li><strong>Decisiones arbitrales:</strong> Son inapelables. El comité disciplinario se reserva el derecho a revisión si se presenta informe escrito.</li>
+  </ol>
+
+  <p>Este reglamento puede ser actualizado por la organización en cualquier momento con previa notificación a los delegados.</p>
+</section>  
+<!-- Sección: Contactos -->
+<section id="contacto" class="contenido oculto">
+  <h2>📞 Contacto de los Organizadores</h2>
+  <p>Si tienes dudas, sugerencias o necesitas asistencia, puedes comunicarte con nosotros:</p>
+
+  <ul>
+    <li><strong>Organizador Principal:</strong> Romulo Martinez</li>
+    <li><strong>Coordinador de Canchas:</strong> Alexander Martinez</li>
+    <li><strong>Email:</strong> <a href="mailto:clubdeportivosanjose351@gmail.com">clubdeportivosanjose351@gmail.com</a></li>
+    <li><strong>Whatsapp:</strong> <a href="#" target="_blank">300-887-1311</a></li>
+  </ul>
+
+  <p>Horarios de atención: Lunes a Viernes de 8:00 a.m. a 6:00 p.m.</p>
+</section>
+</body>
+<script src="script.js"></script>
+</html>

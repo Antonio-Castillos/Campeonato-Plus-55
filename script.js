@@ -145,3 +145,11 @@ function mostrarSeccion(id) {
   // Inicial
   cargarDatos();
   actualizarTabla();
+
+<script>
+    function descargarExcel() {
+      const tabla = document.getElementById('partidos');
+      const wb = XLSX.utils.table_to_book(tabla, { sheet: "Partidos" });
+      XLSX.writeFile(wb, 'Proximos_Partidos.xlsx');
+    }
+</script>

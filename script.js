@@ -44,21 +44,53 @@ function mostrarSeccion(id) {
       b.Pts - a.Pts || b.DG - a.DG || b.GF - a.GF || a.nombre.localeCompare(b.nombre)
     );
 
+    import re
+
+    new_row_code = """
     lista.forEach(e => {
       cuerpo.innerHTML += `
-        <tr>
+        <tr data-equipo="${e.nombre}">
           <td>${e.nombre}</td>
-          <td>${e.PJ}</td>
-          <td>${e.PG}</td>
-          <td>${e.PE}</td>
-          <td>${e.PP}</td>
+          <td contenteditable="true" data-campo="PJ">${e.PJ}</td>
+          <td contenteditable="true" data-campo="PG">${e.PG}</td>
+          <td contenteditable="true" data-campo="PE">${e.PE}</td>
+          <td contenteditable="true" data-campo="PP">${e.PP}</td>
           <td>${e.GF}</td>
           <td>${e.GC}</td>
           <td>${e.DG}</td>
           <td>${e.Pts}</td>
         </tr>`;
     });
-  }
+
+    pattern = re.compile(r"lista\.forEach\(.*?cuerpo\.innerHTML \+= `.*?<\/tr>`;\n    \}\);", re.DOTALL)
+updated_script_content = re.sub(pattern, new_row_code, updated_script_content)
+
+    with open(script_path, "w", encoding="utf-8") as f:
+    f.write(updated_script_content)
+
+    // Escuchar cambios en las celdas editables
+    document.querySelectorAll("#tablaPosiciones td[contenteditable='true']").forEach(celda => {
+      celda.addEventListener("blur", (e) => {
+        const td = e.target;
+        const tr = td.parentElement;
+        const equipo = normalizar(tr.dataset.equipo);
+        const campo = td.dataset.campo;
+        const nuevoValor = parseInt(td.innerText.trim());
+
+        if (!isNaN(nuevoValor) && equipos[equipo]) {
+          equipos[equipo][campo] = nuevoValor;
+
+          // Recalcular PJ si se editó PG, PE o PP
+          if (["PG", "PE", "PP"].includes(campo)) {
+            equipos[equipo].PJ = equipos[equipo].PG + equipos[equipo].PE + equipos[equipo].PP;
+          }
+
+          actualizarTabla();
+          guardarDatos();
+        }
+      });
+    });
+"""
 
   function procesarResultado(e1, g1, e2, g2) {
     e1 = normalizar(e1);
@@ -151,4 +183,5 @@ function mostrarSeccion(id) {
       const wb = XLSX.utils.table_to_book(tabla, { sheet: "Partidos" });
       XLSX.writeFile(wb, 'Proximos_Partidos.xlsx');
     }
+
 

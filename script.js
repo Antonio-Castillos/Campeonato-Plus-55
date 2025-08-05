@@ -44,25 +44,8 @@ function mostrarSeccion(id) {
       b.Pts - a.Pts || b.DG - a.DG || b.GF - a.GF || a.nombre.localeCompare(b.nombre)
     );
 
-    import re
-
     new_row_code = """
-    lista.forEach(e => {
-      cuerpo.innerHTML += `
-        <tr data-equipo="${e.nombre}">
-          <td>${e.nombre}</td>
-          <td contenteditable="true" data-campo="PJ">${e.PJ}</td>
-          <td contenteditable="true" data-campo="PG">${e.PG}</td>
-          <td contenteditable="true" data-campo="PE">${e.PE}</td>
-          <td contenteditable="true" data-campo="PP">${e.PP}</td>
-          <td>${e.GF}</td>
-          <td>${e.GC}</td>
-          <td>${e.DG}</td>
-          <td>${e.Pts}</td>
-        </tr>`;
-    });
-
-    pattern = re.compile(r"lista\.forEach\(.*?cuerpo\.innerHTML \+= `.*?<\/tr>`;\n    \}\);", re.DOTALL)
+    lista.forEach(pattern = re.compile(r"lista\.forEach\(.*?cuerpo\.innerHTML \+= `.*?<\/tr>`;\n    \}\);", re.DOTALL)
 updated_script_content = re.sub(pattern, new_row_code, updated_script_content)
 
     with open(script_path, "w", encoding="utf-8") as f:
@@ -183,5 +166,6 @@ updated_script_content = re.sub(pattern, new_row_code, updated_script_content)
       const wb = XLSX.utils.table_to_book(tabla, { sheet: "Partidos" });
       XLSX.writeFile(wb, 'Proximos_Partidos.xlsx');
     }
+
 
 

@@ -8,8 +8,8 @@ function mostrarSeccion(id) {
   const resultados = {};
 
   function normalizar(nombre) {
-    return nombre.trim(); // sensible a mayúsculas/minúsculas
-  }
+  return nombre.trim().toLowerCase();
+}
 
   function guardarDatos() {
     localStorage.setItem('equipos_plus55', JSON.stringify(equipos));
@@ -151,3 +151,4 @@ function mostrarSeccion(id) {
       const wb = XLSX.utils.table_to_book(tabla, { sheet: "Partidos" });
       XLSX.writeFile(wb, 'Proximos_Partidos.xlsx');
     }
+

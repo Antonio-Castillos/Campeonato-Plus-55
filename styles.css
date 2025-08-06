@@ -151,8 +151,10 @@ footer {
 }
 
 .seccion.activa {
-  display: block;
-  min-height: calc(100vh - 180px); /* Ajusta según el tamaño de tu header + footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 220px);
 }
 
 footer {
@@ -162,3 +164,4 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
 }
+

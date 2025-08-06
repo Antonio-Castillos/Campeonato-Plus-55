@@ -166,4 +166,26 @@ footer {
   font-size: 0.9rem;
 }
 
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
 
+#tablaPosiciones {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* para que no se encoja demasiado */
+}
+
+#tablaPosiciones th,
+#tablaPosiciones td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  #tablaPosiciones {
+    min-width: 800px; /* fuerza scroll horizontal en móviles */
+    font-size: 0.85rem; /* opcional: reducir fuente en móviles */
+  }
+}

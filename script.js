@@ -1,16 +1,15 @@
-const API_URL = 'https://api-campeonato.onrender.com'; // ← tu URL de la API
+const API_URL = 'https://api-campeonato.onrender.com'; // cambia a tu URL real si es diferente
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarEquipos();
+    document.getElementById('formularioResultado').addEventListener('submit', registrarPartido);
+    configurarNavegacion();
+});
 
-    // Registrar resultado de partido
-    document.getElementById('formularioResultado')?.addEventListener('submit', registrarPartido);
+function configurarNavegacion() {
+    mostrarSeccion('inicio'); // mostrar sección por defecto
 
-    // Mostrar sección inicial
-    mostrarSeccion('inicio');
-
-    // Navegación entre secciones
-    document.querySelectorAll('nav a, .navegacion-rapida a').forEach(enlace => {
+    document.querySelectorAll('nav a').forEach(enlace => {
         enlace.addEventListener('click', (e) => {
             e.preventDefault();
             const seccionId = e.target.dataset.seccion;
@@ -20,7 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+}
+
+function mostrarSeccion(id) {
+    document.querySelectorAll('.seccion').forEach(seccion => {
+        seccion.classList.remove('activa');
+        seccion.style.display = 'none';
+    });
+
+    const activa = document.getElementById(id);
+    if (activa) {
+        activa.classList.add('activa');
+        activa.style.display = 'block';
+    }
+}
 
 async function cargarEquipos() {
     try {
@@ -62,7 +74,12 @@ async function registrarPartido(e) {
         return;
     }
 
-    const partido = { local, visitante, golesLocal, golesVisitante };
+    const partido = {
+        local,
+        visitante,
+        golesLocal,
+        golesVisitante
+    };
 
     try {
         const res = await fetch(`${API_URL}/partidos`, {
@@ -72,7 +89,7 @@ async function registrarPartido(e) {
         });
 
         if (res.ok) {
-            await cargarEquipos(); // Recarga la tabla con datos actualizados
+            await cargarEquipos();
             document.getElementById('formularioResultado').reset();
         } else {
             console.error('Error al registrar partido:', await res.text());
@@ -87,8 +104,9 @@ function renderizarTabla(equipos) {
     tbody.innerHTML = '';
     equipos.sort((a, b) => {
         if (b.puntos !== a.puntos) return b.puntos - a.puntos;
-        if (b.golesFavor !== a.golesFavor) return b.golesFavor - a.golesFavor;
-        if (a.golesContra !== b.golesContra) return a.golesContra - b.golesContra;
+        if (b.pg !== a.pg) return b.pg - a.pg;
+        if (b.gf !== a.gf) return b.gf - a.gf;
+        if (a.gc !== b.gc) return a.gc - b.gc;
         if (b.diferenciaGoles !== a.diferenciaGoles) return b.diferenciaGoles - a.diferenciaGoles;
         return a.nombre.localeCompare(b.nombre);
     });
@@ -152,16 +170,5 @@ async function eliminarEquipo(id) {
         }
     } catch (error) {
         console.error('Error al conectar con la API:', error);
-    }
-}
-
-function mostrarSeccion(id) {
-    document.querySelectorAll('.seccion').forEach(seccion => {
-        seccion.classList.remove('activa');
-    });
-
-    const activa = document.getElementById(id);
-    if (activa) {
-        activa.classList.add('activa');
     }
 }

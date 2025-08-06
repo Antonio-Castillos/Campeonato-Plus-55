@@ -1,8 +1,25 @@
-const API_URL = 'https://api-campeonato.onrender.com'; // ← reemplázalo por tu URL real
+const API_URL = 'https://api-campeonato.onrender.com'; // ← tu URL de la API
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarEquipos();
-    document.getElementById('formularioResultado').addEventListener('submit', registrarPartido);
+
+    // Registrar resultado de partido
+    document.getElementById('formularioResultado')?.addEventListener('submit', registrarPartido);
+
+    // Mostrar sección inicial
+    mostrarSeccion('inicio');
+
+    // Navegación entre secciones
+    document.querySelectorAll('nav a, .navegacion-rapida a').forEach(enlace => {
+        enlace.addEventListener('click', (e) => {
+            e.preventDefault();
+            const seccionId = e.target.dataset.seccion;
+            if (seccionId) {
+                mostrarSeccion(seccionId);
+                history.pushState(null, '', `#${seccionId}`);
+            }
+        });
+    });
 });
 
 async function cargarEquipos() {
@@ -45,12 +62,7 @@ async function registrarPartido(e) {
         return;
     }
 
-    const partido = {
-        local,
-        visitante,
-        golesLocal,
-        golesVisitante
-    };
+    const partido = { local, visitante, golesLocal, golesVisitante };
 
     try {
         const res = await fetch(`${API_URL}/partidos`, {
@@ -60,7 +72,7 @@ async function registrarPartido(e) {
         });
 
         if (res.ok) {
-            await cargarEquipos();
+            await cargarEquipos(); // Recarga la tabla con datos actualizados
             document.getElementById('formularioResultado').reset();
         } else {
             console.error('Error al registrar partido:', await res.text());
@@ -74,7 +86,6 @@ function renderizarTabla(equipos) {
     const tbody = document.querySelector('#tablaPosiciones tbody');
     tbody.innerHTML = '';
     equipos.sort((a, b) => {
-        // Criterios de desempate
         if (b.puntos !== a.puntos) return b.puntos - a.puntos;
         if (b.golesFavor !== a.golesFavor) return b.golesFavor - a.golesFavor;
         if (a.golesContra !== b.golesContra) return a.golesContra - b.golesContra;
@@ -84,7 +95,6 @@ function renderizarTabla(equipos) {
 
     equipos.forEach(equipo => {
         const tr = document.createElement('tr');
-
         tr.innerHTML = `
             <td>${equipo.nombre}</td>
             <td contenteditable="true" onblur="actualizarCampo(this, '${equipo._id}', 'pj')">${equipo.pj}</td>
@@ -97,7 +107,6 @@ function renderizarTabla(equipos) {
             <td>${equipo.puntos}</td>
             <td><button onclick="eliminarEquipo('${equipo._id}')">🗑️</button></td>
         `;
-
         tbody.appendChild(tr);
     });
 }
@@ -118,7 +127,7 @@ async function actualizarCampo(td, id, campo) {
         });
 
         if (res.ok) {
-            await cargarEquipos(); // para actualizar GF, GC, puntos, etc.
+            await cargarEquipos();
         } else {
             console.error('Error al actualizar campo:', await res.text());
         }
@@ -146,30 +155,13 @@ async function eliminarEquipo(id) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Mostrar sección inicial
-  mostrarSeccion('inicio');
-
-  // Navegación entre secciones
-  document.querySelectorAll('nav a, .navegacion-rapida a').forEach(enlace => {
-    enlace.addEventListener('click', (e) => {
-      e.preventDefault();
-      const seccionId = e.target.dataset.seccion;
-      if (seccionId) {
-        mostrarSeccion(seccionId);
-        history.pushState(null, '', `#${seccionId}`); // Opcional: actualiza la URL
-      }
-    });
-  });
-});
-
 function mostrarSeccion(id) {
-  document.querySelectorAll('.seccion').forEach(seccion => {
-    seccion.classList.remove('activa');
-  });
+    document.querySelectorAll('.seccion').forEach(seccion => {
+        seccion.classList.remove('activa');
+    });
 
-  const activa = document.getElementById(id);
-  if (activa) {
-    activa.classList.add('activa');
-  }
+    const activa = document.getElementById(id);
+    if (activa) {
+        activa.classList.add('activa');
+    }
 }

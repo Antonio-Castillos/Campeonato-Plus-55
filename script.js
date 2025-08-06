@@ -145,3 +145,31 @@ async function eliminarEquipo(id) {
         console.error('Error al conectar con la API:', error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Mostrar sección inicial
+  mostrarSeccion('inicio');
+
+  // Navegación entre secciones
+  document.querySelectorAll('nav a, .navegacion-rapida a').forEach(enlace => {
+    enlace.addEventListener('click', (e) => {
+      e.preventDefault();
+      const seccionId = e.target.dataset.seccion;
+      if (seccionId) {
+        mostrarSeccion(seccionId);
+        history.pushState(null, '', `#${seccionId}`); // Opcional: actualiza la URL
+      }
+    });
+  });
+});
+
+function mostrarSeccion(id) {
+  document.querySelectorAll('.seccion').forEach(seccion => {
+    seccion.classList.remove('activa');
+  });
+
+  const activa = document.getElementById(id);
+  if (activa) {
+    activa.classList.add('activa');
+  }
+}

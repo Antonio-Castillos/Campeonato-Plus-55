@@ -4,175 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Campeonato Plus 55</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
   <header>
-    <h1>Campeonato Plus 55</h1>
     <nav>
       <ul>
-        <li><a href="#inicio" data-seccion="inicio">Inicio</a></li>
-        <li><a href="#tabla" data-seccion="tabla">Tabla de Posiciones</a></li>
-        <li><a href="#partidos" data-seccion="partidos">Partidos</a></li>
-        <li><a href="#contacto" data-seccion="contacto">Contacto</a></li>
+        <li><a href="#" data-seccion="inicio">Inicio</a></li>
+        <li><a href="#" data-seccion="tabla">Tabla de Posiciones</a></li>
+        <li><a href="#" data-seccion="partidos">Partidos</a></li>
+        <li><a href="#" data-seccion="contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <!-- INICIO -->
-    <section id="inicio" class="card seccion">
-      <h2>Bienvenidos al Campeonato Plus 55</h2>
-      <div class="banner">
-        <img src="banner.jpg" alt="Campeonato Plus 55" />
-      </div>
-      <p class="subtitulo">Fútbol, pasión y experiencia en cada jugada</p>
-      <div class="card">
-       <h2>Sobre el Campeonato</h2>
-      <p>
-      El Campeonato Plus 55 reúne a equipos de jugadores experimentados para compartir la pasión por el fútbol en un ambiente competitivo y de camaradería. ¡Sigue los partidos, apoya a tu equipo y vive la emoción!
-      </p>
-      </div>
-      <div class="card destacado">
-        <h3>Próximo Partido</h3>
-        <p><strong>Socios de Cristo</strong> vs <strong>Veteranos</strong></p>
-        <p><small>Fecha: 10 de agosto, 9:00 AM</small></p>
-      </div>
-      <div class="navegacion-rapida">
-        <a href="tabla" data-seccion="tabla" class="btn">Ver Tabla</a>
-        <a href="partidos" data-seccion="partidos" class="btn">Partidos</a>
-      </div>
+    <!-- Sección Inicio -->
+    <section id="inicio" class="seccion activa">
+      <h1>Bienvenidos al Campeonato Plus 55</h1>
+      <p>Información general del campeonato.</p>
     </section>
 
-    <!-- TABLA DE POSICIONES -->
-    <section id="tablaPosiciones" class="seccion">
+    <!-- Sección Tabla de Posiciones -->
+    <section id="tabla" class="seccion">
       <h2>Tabla de Posiciones</h2>
-
-      <!-- Formulario para registrar resultados -->
-      <div class="card">
-        <h3>Registrar Resultado</h3>
-        <form id="formularioResultado">
-          <label for="equipo1">Equipo 1:</label>
-          <select id="equipoLocal" required>
-          <option value="Amigos de Nieve">Amigos de Nieve</option>
-          <option value="Amigos de Bovea">Amigos de Bovea</option>
-          <option value="Barranquilla Caracas">Barranquilla Caracas</option>
-          <option value="Curuña">Curuña</option>
-          <option value="Dida">Dida</option>
-          <option value="Educadores">Educadores</option>
-          <option value="Hermanos de la Hoz">Hermanos de la Hoz</option>
-          <option value="Incolta">Incolta</option>
-          <option value="Instenalco">Instenalco</option>
-          <option value="Junior">Junior</option>
-          <option value="Juego Limpio">Juego Limpio</option>
-          <option value="Prodexport">Prodexport</option>
-          <option value="Real Amistad">Real Amistad</option>
-          <option value="Respol">Respol</option>
-          <option value="Remotriz">Remotriz</option>
-          <option value="Socios de Cristo">Socios de Cristo</option>
-          <option value="Sporting">Sporting</option>
-          <option value="Simon Bolivar">Simon Bolivar</option>
-          <option value="San Lorenzo">San Lorenzo</option>
-          <option value="Unidos F.C">Unidos F.C</option>
-          <option value="Veteranos">Veteranos</option>
-          </select>
-          <input type="number" id="golesLocal" placeholder="Goles" min="0" required />
-
-          <label for="equipo2">Equipo 2:</label>
-          <select id="equipoVisitante" required>
-            <option value="Amigos de Nieve">Amigos de Nieve</option>
-          <option value="Amigos de Bovea">Amigos de Bovea</option>
-          <option value="Barranquilla Caracas">Barranquilla Caracas</option>
-          <option value="Curuña">Curuña</option>
-          <option value="Dida">Dida</option>
-          <option value="Educadores">Educadores</option>
-          <option value="Hermanos de la Hoz">Hermanos de la Hoz</option>
-          <option value="Incolta">Incolta</option>
-          <option value="Instenalco">Instenalco</option>
-          <option value="Junior">Junior</option>
-          <option value="Juego Limpio">Juego Limpio</option>
-          <option value="Prodexport">Prodexport</option>
-          <option value="Real Amistad">Real Amistad</option>
-          <option value="Respol">Respol</option>
-          <option value="Remotriz">Remotriz</option>
-          <option value="Socios de Cristo">Socios de Cristo</option>
-          <option value="Sporting">Sporting</option>
-          <option value="Simon Bolivar">Simon Bolivar</option>
-          <option value="San Lorenzo">San Lorenzo</option>
-          <option value="Unidos F.C">Unidos F.C</option>
-          <option value="Veteranos">Veteranos</option>
-          </select>
-          <input type="number" id="golesVisitante" placeholder="Goles" min="0" required />
-
-          <button type="submit">Registrar</button>
-        </form>
-      </div>
-
-      <!-- Tabla de posiciones -->
-      <div class="card">
-        <div class="tabla-responsive">
-        <table id="tablaPosiciones">
-          <thead>
-            <tr>
-              <th>Equipo</th>
-              <th>PJ</th>
-              <th>PG</th>
-              <th>PE</th>
-              <th>PP</th>
-              <th>GF</th>
-              <th>GC</th>
-              <th>DG</th>
-              <th>Pts</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        </div>
-      </div>
+      <table id="tablaPosiciones">
+        <thead>
+          <tr>
+            <th>Equipo</th>
+            <th>PJ</th>
+            <th>PG</th>
+            <th>PE</th>
+            <th>PP</th>
+            <th>GF</th>
+            <th>GC</th>
+            <th>DG</th>
+            <th>Pts</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
 
-    <!-- PARTIDOS -->
-    <section id="partidos" class="card seccion">
-      <h2>Partidos</h2>
-      <div id="listaPartidos"></div>
+    <!-- Sección Partidos -->
+    <section id="partidos" class="seccion">
+      <h2>Registrar Partido</h2>
+      <form id="formularioResultado">
+        <label for="equipoLocal">Equipo Local:</label>
+        <select id="equipoLocal" required></select>
+
+        <label for="golesLocal">Goles Local:</label>
+        <input type="number" id="golesLocal" required min="0" />
+
+        <label for="equipoVisitante">Equipo Visitante:</label>
+        <select id="equipoVisitante" required></select>
+
+        <label for="golesVisitante">Goles Visitante:</label>
+        <input type="number" id="golesVisitante" required min="0" />
+
+        <button type="submit">Registrar Resultado</button>
+      </form>
     </section>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="card seccion">
+    <!-- Sección Contacto -->
+    <section id="contacto" class="seccion">
       <h2>Contacto</h2>
-      <p>¿Tienes alguna duda o sugerencia? Escríbenos a</p>
-        <br>
-        <p>Correo:<a href="mailto:clubdeportivosanjose351@gmail.com"> clubdeportivosanjose351@gmail.com</a></p>
-        <p>Whatsapp:<a href="https://w.app/oddwwi"> 3008871311</a></p>
+      <p>Información de contacto o formulario.</p>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2025 Campeonato Plus 55. Todos los derechos reservados.</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

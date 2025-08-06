@@ -157,5 +157,29 @@ footer {
   min-height: calc(100vh - 220px);
 }
 
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
 
+#tablaPosiciones {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  text-align: center;
+}
 
+#tablaPosiciones th,
+#tablaPosiciones td {
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .tabla-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #tablaPosiciones {
+    font-size: 0.85rem;
+  }
+}

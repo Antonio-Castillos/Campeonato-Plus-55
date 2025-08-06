@@ -169,3 +169,22 @@ function recalcularDesdeManual(nombre) {
 
 form.addEventListener("submit", registrarPartido);
 init();
+
+// Mostrar solo una sección a la vez
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const seccionId = link.getAttribute("data-seccion");
+    mostrarSeccion(seccionId);
+  });
+});
+
+function mostrarSeccion(id) {
+  document.querySelectorAll(".seccion").forEach(sec => {
+    sec.classList.remove("activa");
+  });
+  document.getElementById(id).classList.add("activa");
+}
+
+// Mostrar sección de inicio al cargar
+mostrarSeccion("inicio");

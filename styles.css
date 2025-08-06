@@ -5,6 +5,7 @@ html, body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Encabezado */
@@ -189,3 +190,4 @@ footer {
     font-size: 0.85rem; /* opcional: reducir fuente en móviles */
   }
 }
+

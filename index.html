@@ -4,176 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Campeonato Plus 55</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="shortcut icon" href="img/balon.webp">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Encabezado -->
-  <header class="encabezado-principal"> 
-    <img src="img/logo.png" alt="Logo Plus 55" style="max-height: 100px; margin-bottom: 0.5rem;" />
-  </header>
-  <!-- Menú -->
-  <nav>
-    <a onclick="mostrarSeccion('inicio')">Inicio</a>
-    <a onclick="mostrarSeccion('tabla')">Tabla de Posiciones</a>
-    <a onclick="mostrarSeccion('reglamento')">Reglamento</a>
-    <a onclick="mostrarSeccion('contacto')">Contacto</a>
-  </nav>
-  <!-- Sección: Inicio -->
-  <section id="inicio" class="contenido">
-    <section class="bienvenida">
-      <h2>Bienvenidos al Campeonato Plus 55</h2>
-      <p>El espacio oficial para seguir toda la información del campeonato de fútbol para veteranos mayores de 55 años.</p>
-    </section>
-
-    <section class="avisos">
-      <h3>📢 Avisos Recientes</h3>
+  <header>
+    <h1>Campeonato Plus 55</h1>
+    <nav>
       <ul>
-        <li><strong>28/07/2025:</strong> Cambio de horario en el partido entre Águilas vs Titanes (4:00 p.m.).</li>
-        <li><strong>27/07/2025:</strong> Reunión de delegados el jueves 31 a las 6:30 p.m.</li>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#tabla">Tabla de Posiciones</a></li>
+        <li><a href="#partidos">Partidos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INICIO -->
+    <section id="inicio" class="card">
+      <h2>Bienvenidos al Campeonato Plus 55</h2>
+      <p>Esta es la página oficial del torneo de fútbol para mayores de 55 años. Aquí podrás seguir la tabla de posiciones, registrar resultados de partidos y mantenerte al día con toda la información del campeonato.</p>
     </section>
 
-    <section class="programacion">
-      <h3>📅 Próximos Partidos</h3>
-      <table id="partidos">
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>02/Agosto/2025</td><td>2:00 p.m.</td><td>Veteranos vs Hermanos de la Hoz</td>
-        <tr><td>02/Agosto/2025</td><td>3:30 p.m.</td><td>Real Amistad vs Juego Limpio</td>
-        <tr><td>02/Agosto/2025</td><td>4:00 p.m.</td><td>Educadores vs Intenalco</td>
-        <tr><td>03/Agosto/2025</td><td>8:30 a.m.</td><td>Amigos de nieve vs Prodexport</td>
-        <tr><td>03/Agosto/2025</td><td>10:30 a.m.</td><td>Amigos de Bovea vs Junior</td>
-        <tr><td>03/Agosto/2025</td><td>11:00 a.m.</td><td>San Lorenzo vs Unidos F.C</td>
-        <tr><td>03/Agosto/2025</td><td>1:00 p.m.</td><td>Prodexport vs Curuña</td>
-        <tr><td>03/Agosto/2025</td><td>2:30 p.m.</td><td>Remotriz vs Sporting</td>
-        <tr><td>03/Agosto/2025</td><td>4:00 p.m.</td><td>Respol vs Dida</td>
-          <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>09/Agosto/2025</td><td>2:00 p.m.</td><td>Curuña vs Unidos</td>
-        <tr><td>09/Agosto/2025</td><td>3:30 p.m.</td><td>Junior vs Remotriz</td>
-        <tr><td>09/Agosto/2025</td><td>4:00 p.m.</td><td>San Lorenzo vs Respol</td>
-        <tr><td>10/Agosto/2025</td><td>8:30 a.m.</td><td>Dida vs intenalco</td>
-        <tr><td>10/Agosto/2025</td><td>10:30 a.m.</td><td>B/Quilla Caracas vs Real Amistad</td>
-        <tr><td>10/Agosto/2025</td><td>11:00 a.m.</td><td>Hermanos de la Hoz vs Simom Bolivar</td>
-        <tr><td>10/Agosto/2025</td><td>1:00 p.m.</td><td>Educadores vs Amigos de Nieve</td>
-        <tr><td>10/Agosto/2025</td><td>2:30 p.m.</td><td>Sporting vs Incolta</td>
-        <tr><td>10/Agosto/2025</td><td>4:00 p.m.</td><td>Socios de Cristo vs Veteranos</td>
-          <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>16/Agosto/2025</td><td>2:00 p.m.</td><td>Prodexport vs B/Quilla Caracas</td>
-        <tr><td>16/Agosto/2025</td><td>3:30 p.m.</td><td>Intenalco vs San Lorenzo</td>
-        <tr><td>16/Agosto/2025</td><td>4:00 p.m.</td><td>Unidos F.C vs Respol</td>
-        <tr><td>17/Agosto/2025</td><td>8:30 a.m.</td><td>Incolta vs Junior</td>
-        <tr><td>17/Agosto/2025</td><td>10:30 a.m.</td><td>Veteranos vs Amigos de Nieve</td>
-        <tr><td>17/Agosto/2025</td><td>11:00 a.m.</td><td>Respol vs Curuña</td>
-        <tr><td>17/Agosto/2025</td><td>1:00 p.m.</td><td>Real Amistad vs Sporting</td>
-        <tr><td>17/Agosto/2025</td><td>2:30 p.m.</td><td>Amigos de Bovea vs Hermanos de la Hoz</td>
-        <tr><td>17/Agosto/2025</td><td>4:00 p.m.</td><td>Simom Bolivar vs Socios de Cristo</td>
-           <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>23/Agosto/2025</td><td>2:00 p.m.</td><td>Sporting vs Prodexport</td>
-        <tr><td>23/Agosto/2025</td><td>3:30 p.m.</td><td>San Lorenzo vs Dida</td>
-        <tr><td>23/Agosto/2025</td><td>4:00 p.m.</td><td>Curuña vs Intenalco</td>
-        <tr><td>24/Agosto/2025</td><td>8:30 a.m.</td><td>Educadores vs Veteranos</td>
-        <tr><td>24/Agosto/2025</td><td>10:30 a.m.</td><td>Hermanos de la Hoz vs Remotriz</td>
-        <tr><td>24/Agosto/2025</td><td>11:00 a.m.</td><td>Amigos de Nieve vs Simom Bolivar</td>
-        <tr><td>24/Agosto/2025</td><td>1:00 p.m.</td><td>Junior vs Real Amistad</td>
-        <tr><td>24/Agosto/2025</td><td>2:30 p.m.</td><td>Juego Limpio vs Respol</td>
-        <tr><td>24/Agosto/2025</td><td>4:00 p.m.</td><td>B/Quilla Caracas vs Unidos F.C</td>
-          <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>30/Agosto/2025</td><td>2:00 p.m.</td><td>Remotriz vs Socios de Cristo</td>
-        <tr><td>30/Agosto/2025</td><td>3:30 p.m.</td><td>Intenalco vs Juego Limpio</td>
-        <tr><td>30/Agosto/2025</td><td>4:00 p.m.</td><td>Prodexport vs Junior</td>
-        <tr><td>31/Agosto/2025</td><td>8:30 a.m.</td><td>Incolta vs Hermanos de la Hoz</td>
-        <tr><td>31/Agosto/2025</td><td>10:30 a.m.</td><td>Dida vs Curuña</td>
-        <tr><td>31/Agosto/2025</td><td>11:00 a.m.</td><td>Amigos de Bovea vs Amigos de Nieve</td>
-        <tr><td>31/Agosto/2025</td><td>1:00 p.m.</td><td>Respol zs B/Quilla Caracas</td>
-        <tr><td>31/Agosto/2025</td><td>2:30 p.m.</td><td>Simom Bolivar vs Vteranosl</td>
-        <tr><td>31/Agosto/2025</td><td>4:00 p.m.</td><td>Educadores vs San Lorenzo</td>
-          <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>06/Septiembre/2025</td><td>2:00 p.m.</td><td>Veteranos vs Dida</td>
-        <tr><td>06/Septiembre/2025</td><td>3:30 p.m.</td><td>San Lorenzo vs Amigos de Nieve</td>
-        <tr><td>06/Septiembre/2025</td><td>4:00 p.m.</td><td>Incolta vs Prodexport</td>
-        <tr><td>07/Septiembre/2025</td><td>8:30 a.m.</td><td>Socios de Cristo vs Curuña</td>
-        <tr><td>07/Septiembre/2025</td><td>10:30 a.m.</td><td>Remotriz vs Unidos F.C</td>
-        <tr><td>07/Septiembre/2025</td><td>11:00 a.m.</td><td>Amigos de Bovea vs Respol</td>
-        <tr><td>07/Septiembre/2025</td><td>1:00 p.m.</td><td>Educadores zs Real Amistad</td>
-        <tr><td>07/Septiembre/2025</td><td>2:30 p.m.</td><td>Hermanos de la Hoz vs Juego Limpio</td>
-        <tr><td>07/Septiembre/2025</td><td>4:00 p.m.</td><td>Sporting vs Junior</td>
-          <br>
-        <tr><th>Fecha</th><th>Hora</th><th>Partido</th>
-        <tr><td>13/Septiembre/2025</td><td>2:00 p.m.</td><td>Undos F.C vs Sporting</td>
-        <tr><td>13/Septiembre/2025</td><td>3:30 p.m.</td><td>Juego Limpio vs Prodexport</td>
-        <tr><td>13/Septiembre/2025</td><td>4:00 p.m.</td><td>Veteranos vs Junior</td>
-        <tr><td>14/Septiembre/2025</td><td>8:30 a.m.</td><td>Incolta vs B/Quilla Caracas</td>
-        <tr><td>14/Septiembre/2025</td><td>10:30 a.m.</td><td>Curuña vs Simom Bolivar</td>
-        <tr><td>14/Septiembre/2025</td><td>11:00 a.m.</td><td>Remotriz vs San Lorenzo</td>
-        <tr><td>14/Septiembre/2025</td><td>1:00 p.m.</td><td>Socios de Cristo vs Amigos de Bovea</td>
-        <tr><td>14/Septiembre/2025</td><td>2:30 p.m.</td><td>Educadores vs Dida</td>
-      </table>
-        <button onclick="descargarExcel()">Descargar Excel</button>
+    <!-- TABLA DE POSICIONES -->
+    <section id="tabla">
+      <h2>Tabla de Posiciones</h2>
+
+      <!-- Formulario para registrar resultados -->
+      <div class="card">
+        <h3>Registrar Resultado</h3>
+        <form id="formResultado">
+          <label for="equipo1">Equipo 1:</label>
+          <select id="equipo1" required></select>
+          <input type="number" id="goles1" placeholder="Goles" min="0" required />
+
+          <label for="equipo2">Equipo 2:</label>
+          <select id="equipo2" required></select>
+          <input type="number" id="goles2" placeholder="Goles" min="0" required />
+
+          <button type="submit">Registrar</button>
+        </form>
+      </div>
+
+      <!-- Tabla de posiciones -->
+      <div class="card">
+        <table id="tablaPosiciones">
+          <thead>
+            <tr>
+              <th>Equipo</th>
+              <th>PJ</th>
+              <th>PG</th>
+              <th>PE</th>
+              <th>PP</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>DG</th>
+              <th>Pts</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </section>
-  </section>
-  <!-- Sección: Tabla de posiciones -->
-  <section id="tabla" class="contenido oculto">
-    <h2>🏆 Tabla de Posiciones</h2>
 
-    <table id="tablaPosiciones">
-      <thead>
-        <tr>
-          <th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th>
-          <th>GF</th><th>GC</th><th>DG</th><th>Pts</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <!-- PARTIDOS -->
+    <section id="partidos" class="card">
+      <h2>Partidos</h2>
+      <div id="listaPartidos"></div>
+    </section>
 
-    <form id="formulario">
-      <h3>Ingresar Resultado</h3>
-      <input type="text" id="equipo1" placeholder="Equipo 1" required />
-      <input type="number" id="goles1" placeholder="Goles 1" required />
-      <input type="text" id="equipo2" placeholder="Equipo 2" required />
-      <input type="number" id="goles2" placeholder="Goles 2" required />
-      <button type="submit">Actualizar</button>
-    </form>
-  </section>
-<!-- Sección: Reglamentacion -->
-<section id="reglamento" class="contenido oculto">
-  <h2>📘 Reglamento del Campeonato Plus 55</h2>
-  <p>A continuación se detallan las normas que rigen el desarrollo del torneo:</p>
+    <!-- CONTACTO -->
+    <section id="contacto" class="card">
+      <h2>Contacto</h2>
+      <p>¿Tienes alguna duda o sugerencia? Escríbenos a <a href="mailto:contacto@plus55.com">contacto@plus55.com</a></p>
+    </section>
+  </main>
 
-  <ol>
-    <li><strong>Edad mínima:</strong> Todos los jugadores deben tener 55 años cumplidos o más al inicio del torneo.</li>
-    <li><strong>Duración de los partidos:</strong> 2 tiempos de 30 minutos con descanso de 10 minutos.</li>
-    <li><strong>Cambios ilimitados:</strong> Permitidos en cualquier momento, con autorización del árbitro.</li>
-    <li><strong>Uniforme:</strong> Todos los equipos deben presentarse uniformados con camiseta numerada.</li>
-    <li><strong>Sanciones:</strong> Dos tarjetas amarillas equivalen a una roja. Una tarjeta roja implica suspensión automática por el siguiente partido.</li>
-    <li><strong>Inscripción:</strong> Cada equipo debe entregar planilla con mínimo 12 y máximo 20 jugadores.</li>
-    <li><strong>Puntaje:</strong> Victoria (3 pts), Empate (1 pt), Derrota (0 pts).</li>
-    <li><strong>Desempates:</strong> Se definen por: Diferencia de gol → Goles a favor → Resultado entre equipos → Sorteo.</li>
-    <li><strong>Conducta:</strong> Actitudes violentas o antideportivas serán sancionadas con expulsión definitiva.</li>
-    <li><strong>Decisiones arbitrales:</strong> Son inapelables. El comité disciplinario se reserva el derecho a revisión si se presenta informe escrito.</li>
-  </ol>
+  <footer>
+    <p>&copy; 2025 Campeonato Plus 55. Todos los derechos reservados.</p>
+  </footer>
 
-  <p>Este reglamento puede ser actualizado por la organización en cualquier momento con previa notificación a los delegados.</p>
-</section>  
-<!-- Sección: Contactos -->
-<section id="contacto" class="contenido oculto">
-  <h2>📞 Contacto de los Organizadores</h2>
-  <p>Si tienes dudas, sugerencias o necesitas asistencia, puedes comunicarte con nosotros:</p>
-
-  <ul>
-    <li><strong>Organizador Principal:</strong> Romulo Martinez</li>
-    <li><strong>Coordinador de Canchas:</strong> Alexander Martinez</li>
-    <li><strong>Email:</strong> <a href="mailto:clubdeportivosanjose351@gmail.com">clubdeportivosanjose351@gmail.com</a></li>
-    <li><strong>Whatsapp:</strong> <a href="#" target="_blank">300-887-1311</a></li>
-  </ul>
-
-  <p>Horarios de atención: Lunes a Viernes de 8:00 a.m. a 6:00 p.m.</p>
-</section>
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

@@ -135,3 +135,12 @@ footer {
     gap: 0.5rem;
   }
 }
+
+.seccion {
+  display: none;
+  margin-top: 2rem;
+}
+
+.seccion.activa {
+  display: block;
+}

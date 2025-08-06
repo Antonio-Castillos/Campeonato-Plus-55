@@ -1,9 +1,9 @@
 /* Fuente general */
 body {
+  height: 100%;
   margin: 0;
-  font-family: 'Roboto Slab', serif;
-  background-color: #eaf7eb;
-  color: #1e3a1e;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Encabezado */
@@ -40,6 +40,7 @@ nav a:hover {
 
 /* Contenido principal */
 main {
+  flex: 1; /* hace que el contenido ocupe el espacio disponible */
   padding: 2rem;
 }
 
@@ -50,6 +51,10 @@ main {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   padding: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.card:last-child {
+  margin-bottom: 0;
 }
 
 /* Formulario */
@@ -144,3 +149,4 @@ footer {
 .seccion.activa {
   display: block;
 }
+

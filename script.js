@@ -38,9 +38,16 @@ function renderTabla() {
   tablaBody.innerHTML = "";
 
   const orden = Object.values(posiciones).sort((a, b) => {
-    const directo = enfrentamientoDirecto(b.nombre, a.nombre);
-    return directo || b.PG - a.PG || b.GF - a.GF || a.GC - b.GC || b.DG - a.DG || Math.random() - 0.5;
-  });
+  const directo = enfrentamientoDirecto(b.nombre, a.nombre);
+  return (
+    directo ||
+    b.PG - a.PG ||
+    b.GF - a.GF ||
+    a.GC - b.GC ||
+    b.DG - a.DG ||
+    a.nombre.localeCompare(b.nombre)
+  );
+});
 
   orden.forEach(equipo => {
     const tr = document.createElement("tr");
@@ -198,4 +205,5 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 

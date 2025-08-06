@@ -1,162 +1,151 @@
-/* General */
+/* Fuente general */
 body {
+  height: 100%;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f1fef3;
-  color: #1b4d3e;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Navegación */
+/* Encabezado */
 header {
-  background-color: #2e8b57;
-  padding: 1rem;
+  background-color: #2e7d32;
   color: white;
+  padding: 1rem;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-nav {
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  background-color: #3cb371;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s;
 }
 
 nav a:hover {
-  background-color: #2e8b57;
+  text-decoration: underline;
 }
 
-/* Secciones */
-.seccion {
-  display: none;
+/* Contenido principal */
+main {
+  flex: 1; /* hace que el contenido ocupe el espacio disponible */
   padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
 }
 
-.seccion.activa {
-  display: block;
-}
-
+/* Tarjetas */
 .card {
   background-color: white;
   border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+/* Formulario */
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+form input,
+form select,
+form button {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+form button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #256828;
 }
 
 /* Tabla de posiciones */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+thead {
+  background-color: #a5d6a7;
 }
 
 th, td {
-  padding: 0.8rem;
+  padding: 0.75rem;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #c8e6c9;
 }
 
-th {
-  background-color: #3cb371;
-  color: white;
+td[contenteditable] {
+  background-color: #f1f8e9;
+  cursor: text;
 }
 
-tr:nth-child(even) {
-  background-color: #f0fff0;
-}
-
-/* Botones y formularios */
-button {
-  background-color: #3cb371;
+td button {
+  background-color: #c62828;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #2e8b57;
-}
-
-input[type="number"], select {
-  padding: 0.5rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-bottom: 0.8rem;
-  width: 100%;
-  box-sizing: border-box;
+  cursor: pointer;
 }
 
-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
+td button:hover {
+  background-color: #b71c1c;
 }
 
 /* Footer */
 footer {
+  background-color: #2e7d32;
+  color: white;
   text-align: center;
   padding: 1rem;
-  background-color: #2e8b57;
-  color: white;
-  margin-top: 2rem;
+  font-size: 0.9rem;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  nav {
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  nav ul {
     flex-direction: column;
-    align-items: center;
+    gap: 0.5rem;
   }
+}
 
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
+.seccion {
+  display: none;
+  margin-top: 2rem;
+}
 
-  tr {
-    margin-bottom: 1rem;
-  }
-
-  th, td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
-  }
-
-  th::before, td::before {
-    position: absolute;
-    left: 0;
-    width: 50%;
-    padding-left: 1rem;
-    text-align: left;
-    font-weight: bold;
-    color: #333;
-  }
-
-  th:nth-child(1)::before { content: "Equipo"; }
-  th:nth-child(2)::before { content: "PJ"; }
-  th:nth-child(3)::before { content: "PG"; }
-  th:nth-child(4)::before { content: "PE"; }
-  th:nth-child(5)::before { content: "PP"; }
-  th:nth-child(6)::before { content: "GF"; }
-  th:nth-child(7)::before { content: "GC"; }
-  th:nth-child(8)::before { content: "DG"; }
-  th:nth-child(9)::before { content: "Pts"; }
-  th:nth-child(10)::before { content: "Acción"; }
+.seccion.activa {
+  display: block;
 }

@@ -5,8 +5,8 @@ const equipos = [
   "San Lorenzo", "Unidos F.C", "Veteranos"
 ];
 
-let posiciones = JSON.parse(localStorage.getItem("posiciones")) || {};
-let partidos = JSON.parse(localStorage.getItem("partidos")) || [];
+let posiciones = JSON.parse(fetch().getItem("posiciones")) || {};
+let partidos = JSON.parse(fetch().getItem("partidos")) || [];
 
 const equipo1Select = document.getElementById("equipo1");
 const equipo2Select = document.getElementById("equipo2");
@@ -98,8 +98,8 @@ function enfrentamientoDirecto(a, b) {
 }
 
 function guardarDatos() {
-  localStorage.setItem("posiciones", JSON.stringify(posiciones));
-  localStorage.setItem("partidos", JSON.stringify(partidos));
+  fetch().setItem("posiciones", JSON.stringify(posiciones));
+  fetch().setItem("partidos", JSON.stringify(partidos));
 }
 
 function registrarPartido(e) {
@@ -205,6 +205,7 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 
 
 

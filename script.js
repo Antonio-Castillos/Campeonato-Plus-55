@@ -188,7 +188,7 @@ form.addEventListener("submit", registrarPartido);
 init();
 
 // Mostrar solo una sección a la vez
-document.querySelectorAll("nav a").forEach(link => {
+document.querySelectorAll("[data-seccion]").forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const seccionId = link.getAttribute("data-seccion");
@@ -205,6 +205,7 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 
 
 

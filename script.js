@@ -154,12 +154,29 @@ function renderPartidos() {
   });
 }
 
-function eliminarEquipo(nombre) {
-  if (!confirm(`¿Eliminar ${nombre} de la tabla?`)) return;
-  delete posiciones[nombre];
-  guardarDatos();
-  renderTabla();
+function resetearEquipo(nombreEquipo) {
+  if (tablaPosiciones[nombreEquipo]) {
+    tablaPosiciones[nombreEquipo] = {
+      PJ: 0,
+      PG: 0,
+      PE: 0,
+      PP: 0,
+      GF: 0,
+      GC: 0,
+      DG: 0,
+      Pts: 0
+    };
+    guardarTablaEnLocalStorage();  // Asegúrate de tener esta función para actualizar localStorage
+    mostrarTabla();                // Para volver a renderizar la tabla
+  }
 }
+
+btnEliminar.addEventListener("click", () => {
+  const confirmar = confirm(`¿Deseas resetear los datos de ${equipo}?`);
+  if (confirmar) {
+    resetearEquipo(equipo);
+  }
+});
 
 function recalcularDesdeManual(nombre) {
   const eq = posiciones[nombre];
@@ -188,3 +205,4 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+

@@ -171,13 +171,6 @@ function resetearEquipo(nombreEquipo) {
   }
 }
 
-btnEliminar.addEventListener("click", () => {
-  const confirmar = confirm(`¿Deseas resetear los datos de ${equipo}?`);
-  if (confirmar) {
-    resetearEquipo(equipo);
-  }
-});
-
 function recalcularDesdeManual(nombre) {
   const eq = posiciones[nombre];
   eq.Pts = eq.PG * 3 + eq.PE;
@@ -205,4 +198,5 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 

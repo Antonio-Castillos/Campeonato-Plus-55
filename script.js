@@ -55,7 +55,7 @@ function renderTabla() {
       <td>${equipo.GC}</td>
       <td>${equipo.DG}</td>
       <td>${equipo.Pts}</td>
-      <td><button onclick="eliminarEquipo('${equipo.nombre}')">❌</button></td>
+      <td><button onclick="resetearEquipo('${equipo.nombre}')">🔄</button></td>
     `;
 
     tr.querySelectorAll("[contenteditable]").forEach(cell => {
@@ -155,19 +155,19 @@ function renderPartidos() {
 }
 
 function resetearEquipo(nombreEquipo) {
-  if (tablaPosiciones[nombreEquipo]) {
-    tablaPosiciones[nombreEquipo] = {
-      PJ: 0,
-      PG: 0,
-      PE: 0,
-      PP: 0,
-      GF: 0,
-      GC: 0,
-      DG: 0,
-      Pts: 0
+  if (posiciones[nombreEquipo]) {
+    posiciones[nombreEquipo] = {
+      nombre: nombreEquipo,
+      PJ: 0, PG: 0, PE: 0, PP: 0,
+      GF: 0, GC: 0, DG: 0, Pts: 0
     };
-    guardarTablaEnLocalStorage();  // Asegúrate de tener esta función para actualizar localStorage
-    mostrarTabla();                // Para volver a renderizar la tabla
+
+    // Eliminar partidos en los que participa este equipo
+    partidos = partidos.filter(p => p.equipo1 !== nombreEquipo && p.equipo2 !== nombreEquipo);
+
+    guardarDatos();
+    renderTabla();
+    renderPartidos();
   }
 }
 
@@ -198,5 +198,6 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 
 

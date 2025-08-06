@@ -1,171 +1,171 @@
-function mostrarSeccion(id) {
-  const secciones = document.querySelectorAll('.contenido');
-  secciones.forEach(sec => sec.classList.add('oculto'));
-  document.getElementById(id).classList.remove('oculto');
-}
+const equipos = [
+  "Amigos de Nieve", "Amigos de Bovea", "Barranquilla Caracas", "Curuña", "Dida", "Educadores",
+  "Hermanos de la Hoz", "Incolta", "Instenalco", "Junior", "Juego Limpio", "Prodexport",
+  "Real Amistad", "Respol", "Remotriz", "Socios de Cristo", "Sporting", "Simon Bolivar",
+  "San Lorenzo", "Unidos F.C", "Veteranos"
+];
 
-  const equipos = {};
-  const resultados = {};
+let posiciones = JSON.parse(localStorage.getItem("posiciones")) || {};
+let partidos = JSON.parse(localStorage.getItem("partidos")) || [];
 
-  function normalizar(nombre) {
-  return nombre.trim().toLowerCase();
-}
+const equipo1Select = document.getElementById("equipo1");
+const equipo2Select = document.getElementById("equipo2");
+const tablaBody = document.querySelector("#tablaPosiciones tbody");
+const form = document.getElementById("formResultado");
+const listaPartidos = document.getElementById("listaPartidos");
 
-  function guardarDatos() {
-    localStorage.setItem('equipos_plus55', JSON.stringify(equipos));
-    localStorage.setItem('resultados_plus55', JSON.stringify(resultados));
-  }
+function init() {
+  equipos.forEach(nombre => {
+    const opt1 = document.createElement("option");
+    const opt2 = document.createElement("option");
+    opt1.value = opt2.value = nombre;
+    opt1.textContent = opt2.textContent = nombre;
+    equipo1Select.appendChild(opt1);
+    equipo2Select.appendChild(opt2);
 
-  function cargarDatos() {
-    const guardadosEquipos = localStorage.getItem('equipos_plus55');
-    const guardadosResultados = localStorage.getItem('resultados_plus55');
-    if (guardadosEquipos) {
-      const eq = JSON.parse(guardadosEquipos);
-      Object.keys(eq).forEach(k => equipos[k] = eq[k]);
+    if (!posiciones[nombre]) {
+      posiciones[nombre] = {
+        nombre, PJ: 0, PG: 0, PE: 0, PP: 0, GF: 0, GC: 0, DG: 0, Pts: 0
+      };
     }
-    if (guardadosResultados) {
-      const res = JSON.parse(guardadosResultados);
-      Object.keys(res).forEach(k => resultados[k] = res[k]);
-    }
-  }
-
-  function actualizarTabla() {
-    const cuerpo = document.querySelector("#tablaPosiciones tbody");
-    cuerpo.innerHTML = "";
-
-    const lista = Object.entries(equipos).map(([nombre, e]) => ({
-      nombre,
-      ...e,
-      DG: e.GF - e.GC,
-      Pts: e.PG * 3 + e.PE,
-    }));
-
-    lista.sort((a, b) =>
-      b.Pts - a.Pts || b.DG - a.DG || b.GF - a.GF || a.nombre.localeCompare(b.nombre)
-    );
-
-    new_row_code = """
-    lista.forEach(pattern = re.compile(r"lista\.forEach\(.*?cuerpo\.innerHTML \+= `.*?<\/tr>`;\n    \}\);", re.DOTALL)
-updated_script_content = re.sub(pattern, new_row_code, updated_script_content)
-
-    with open(script_path, "w", encoding="utf-8") as f:
-    f.write(updated_script_content)
-
-    // Escuchar cambios en las celdas editables
-    document.querySelectorAll("#tablaPosiciones td[contenteditable='true']").forEach(celda => {
-      celda.addEventListener("blur", (e) => {
-        const td = e.target;
-        const tr = td.parentElement;
-        const equipo = normalizar(tr.dataset.equipo);
-        const campo = td.dataset.campo;
-        const nuevoValor = parseInt(td.innerText.trim());
-
-        if (!isNaN(nuevoValor) && equipos[equipo]) {
-          equipos[equipo][campo] = nuevoValor;
-
-          // Recalcular PJ si se editó PG, PE o PP
-          if (["PG", "PE", "PP"].includes(campo)) {
-            equipos[equipo].PJ = equipos[equipo].PG + equipos[equipo].PE + equipos[equipo].PP;
-          }
-
-          actualizarTabla();
-          guardarDatos();
-        }
-      });
-    });
-"""
-
-  function procesarResultado(e1, g1, e2, g2) {
-    e1 = normalizar(e1);
-    e2 = normalizar(e2);
-
-    const clave = `${e1}|${e2}`;
-    const claveInvertida = `${e2}|${e1}`;
-
-    for (const k of [clave, claveInvertida]) {
-      if (resultados[k]) {
-        const [prev1, prev2] = resultados[k];
-        restarEstadisticas(e1, prev1, e2, prev2);
-        delete resultados[k];
-      }
-    }
-
-    resultados[clave] = [g1, g2];
-    agregarEstadisticas(e1, g1, e2, g2);
-    guardarDatos();
-  }
-
-  function agregarEstadisticas(e1, g1, e2, g2) {
-    [e1, e2].forEach(e => {
-      if (!equipos[e]) equipos[e] = { PJ: 0, PG: 0, PE: 0, PP: 0, GF: 0, GC: 0 };
-    });
-
-    equipos[e1].PJ++; equipos[e2].PJ++;
-    equipos[e1].GF += g1; equipos[e1].GC += g2;
-    equipos[e2].GF += g2; equipos[e2].GC += g1;
-
-    if (g1 > g2) {
-      equipos[e1].PG++; equipos[e2].PP++;
-    } else if (g1 < g2) {
-      equipos[e2].PG++; equipos[e1].PP++;
-    } else {
-      equipos[e1].PE++; equipos[e2].PE++;
-    }
-  }
-
-  function restarEstadisticas(e1, g1, e2, g2) {
-    equipos[e1].PJ--; equipos[e2].PJ--;
-    equipos[e1].GF -= g1; equipos[e1].GC -= g2;
-    equipos[e2].GF -= g2; equipos[e2].GC -= g1;
-
-    if (g1 > g2) {
-      equipos[e1].PG--; equipos[e2].PP--;
-    } else if (g1 < g2) {
-      equipos[e2].PG--; equipos[e1].PP--;
-    } else {
-      equipos[e1].PE--; equipos[e2].PE--;
-    }
-  }
-
-  document.getElementById("formulario").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const e1 = document.getElementById("equipo1").value;
-    const g1 = parseInt(document.getElementById("goles1").value);
-    const e2 = document.getElementById("equipo2").value;
-    const g2 = parseInt(document.getElementById("goles2").value);
-
-    if (e1 === e2) {
-      alert("Los equipos deben ser distintos.");
-      return;
-    }
-
-    procesarResultado(e1, g1, e2, g2);
-    actualizarTabla();
-    this.reset();
   });
 
-  // 🔁 Botón de reinicio
-  const botonReiniciar = document.createElement("button");
-  botonReiniciar.textContent = "Reiniciar Tabla";
-  botonReiniciar.style.marginTop = "1rem";
-  botonReiniciar.onclick = function () {
-    if (confirm("¿Estás seguro de reiniciar toda la tabla?")) {
-      localStorage.removeItem('equipos_plus55');
-      localStorage.removeItem('resultados_plus55');
-      location.reload();
-    }
-  };
-  document.getElementById("tabla").appendChild(botonReiniciar);
+  renderTabla();
+  renderPartidos();
+}
 
-  // Inicial
-  cargarDatos();
-  actualizarTabla();
+function renderTabla() {
+  tablaBody.innerHTML = "";
 
-    function descargarExcel() {
-      const tabla = document.getElementById('partidos');
-      const wb = XLSX.utils.table_to_book(tabla, { sheet: "Partidos" });
-      XLSX.writeFile(wb, 'Proximos_Partidos.xlsx');
-    }
+  const orden = Object.values(posiciones).sort((a, b) => {
+    const directo = enfrentamientoDirecto(b.nombre, a.nombre);
+    return directo || b.PG - a.PG || b.GF - a.GF || a.GC - b.GC || b.DG - a.DG || Math.random() - 0.5;
+  });
 
+  orden.forEach(equipo => {
+    const tr = document.createElement("tr");
 
+    tr.innerHTML = `
+      <td>${equipo.nombre}</td>
+      <td contenteditable="true" data-field="PJ">${equipo.PJ}</td>
+      <td contenteditable="true" data-field="PG">${equipo.PG}</td>
+      <td contenteditable="true" data-field="PE">${equipo.PE}</td>
+      <td contenteditable="true" data-field="PP">${equipo.PP}</td>
+      <td>${equipo.GF}</td>
+      <td>${equipo.GC}</td>
+      <td>${equipo.DG}</td>
+      <td>${equipo.Pts}</td>
+      <td><button onclick="eliminarEquipo('${equipo.nombre}')">❌</button></td>
+    `;
 
+    tr.querySelectorAll("[contenteditable]").forEach(cell => {
+      cell.addEventListener("blur", () => {
+        const field = cell.dataset.field;
+        const valor = parseInt(cell.textContent) || 0;
+        posiciones[equipo.nombre][field] = valor;
+        recalcularDesdeManual(equipo.nombre);
+        guardarDatos();
+        renderTabla();
+      });
+    });
+
+    tablaBody.appendChild(tr);
+  });
+}
+
+function enfrentamientoDirecto(a, b) {
+  const partidosDirectos = partidos.filter(p =>
+    (p.equipo1 === a && p.equipo2 === b) || (p.equipo1 === b && p.equipo2 === a)
+  );
+
+  let ganaA = 0, ganaB = 0;
+
+  partidosDirectos.forEach(p => {
+    if (p.equipo1 === a && p.goles1 > p.goles2) ganaA++;
+    else if (p.equipo2 === a && p.goles2 > p.goles1) ganaA++;
+    else if (p.equipo1 === b && p.goles1 > p.goles2) ganaB++;
+    else if (p.equipo2 === b && p.goles2 > p.goles1) ganaB++;
+  });
+
+  return ganaB - ganaA;
+}
+
+function guardarDatos() {
+  localStorage.setItem("posiciones", JSON.stringify(posiciones));
+  localStorage.setItem("partidos", JSON.stringify(partidos));
+}
+
+function registrarPartido(e) {
+  e.preventDefault();
+  const eq1 = equipo1Select.value;
+  const eq2 = equipo2Select.value;
+  const g1 = parseInt(document.getElementById("goles1").value);
+  const g2 = parseInt(document.getElementById("goles2").value);
+
+  if (eq1 === eq2) return alert("Los equipos deben ser diferentes.");
+
+  partidos.push({ equipo1: eq1, equipo2: eq2, goles1: g1, goles2: g2 });
+
+  actualizarEstadisticas(eq1, eq2, g1, g2);
+  guardarDatos();
+  renderTabla();
+  renderPartidos();
+  form.reset();
+}
+
+function actualizarEstadisticas(eq1, eq2, g1, g2) {
+  const e1 = posiciones[eq1];
+  const e2 = posiciones[eq2];
+
+  e1.PJ++; e2.PJ++;
+  e1.GF += g1; e1.GC += g2;
+  e2.GF += g2; e2.GC += g1;
+  e1.DG = e1.GF - e1.GC;
+  e2.DG = e2.GF - e2.GC;
+
+  if (g1 > g2) {
+    e1.PG++; e1.Pts += 3;
+    e2.PP++;
+  } else if (g1 < g2) {
+    e2.PG++; e2.Pts += 3;
+    e1.PP++;
+  } else {
+    e1.PE++; e2.PE++;
+    e1.Pts += 1; e2.Pts += 1;
+  }
+
+  e1.DG = e1.GF - e1.GC;
+  e2.DG = e2.GF - e2.GC;
+}
+
+function renderPartidos() {
+  listaPartidos.innerHTML = "";
+
+  if (partidos.length === 0) {
+    listaPartidos.innerHTML = "<p>Aún no se han registrado partidos.</p>";
+    return;
+  }
+
+  partidos.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `<strong>${p.equipo1}</strong> ${p.goles1} - ${p.goles2} <strong>${p.equipo2}</strong>`;
+    listaPartidos.appendChild(div);
+  });
+}
+
+function eliminarEquipo(nombre) {
+  if (!confirm(`¿Eliminar ${nombre} de la tabla?`)) return;
+  delete posiciones[nombre];
+  guardarDatos();
+  renderTabla();
+}
+
+function recalcularDesdeManual(nombre) {
+  const eq = posiciones[nombre];
+  eq.Pts = eq.PG * 3 + eq.PE;
+  eq.DG = eq.GF - eq.GC;
+}
+
+form.addEventListener("submit", registrarPartido);
+init();

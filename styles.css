@@ -194,3 +194,27 @@ footer {
 #listaPartidos .card {
   margin-bottom: 1rem;
 }
+
+.reiniciar-container {
+  text-align: center;
+  margin: 2rem auto 1rem;
+}
+
+.btn-reiniciar {
+  background-color: #4CAF50;  /* Verde armonioso */
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+  background-color: #388e3c;
+  transform: scale(1.03);
+}

@@ -38,15 +38,24 @@ function renderTabla() {
   tablaBody.innerHTML = "";
 
   const orden = Object.values(posiciones).sort((a, b) => {
+  // Enfrentamiento directo
   const directo = enfrentamientoDirecto(b.nombre, a.nombre);
-  return (
-    directo ||
-    b.PG - a.PG ||
-    b.GF - a.GF ||
-    a.GC - b.GC ||
-    b.DG - a.DG ||
-    a.nombre.localeCompare(b.nombre)
-  );
+  if (directo !== 0) return directo;
+
+  // Partidos ganados
+  if (b.PG !== a.PG) return b.PG - a.PG;
+
+  // Goles a favor
+  if (b.GF !== a.GF) return b.GF - a.GF;
+
+  // Goles en contra (menor es mejor)
+  if (a.GC !== b.GC) return a.GC - b.GC;
+
+  // Diferencia de goles
+  if (b.DG !== a.DG) return b.DG - a.DG;
+
+  // Orden alfabético como último recurso
+  return a.nombre.localeCompare(b.nombre);
 });
 
   orden.forEach(equipo => {
@@ -80,21 +89,38 @@ function renderTabla() {
   });
 }
 
-function enfrentamientoDirecto(a, b) {
-  const partidosDirectos = partidos.filter(p =>
-    (p.equipo1 === a && p.equipo2 === b) || (p.equipo1 === b && p.equipo2 === a)
+function enfrentamientoDirecto(equipoA, equipoB) {
+  const enfrentamientos = resultados.filter(
+    (r) =>
+      (r.equipoLocal === equipoA && r.equipoVisitante === equipoB) ||
+      (r.equipoLocal === equipoB && r.equipoVisitante === equipoA)
   );
 
-  let ganaA = 0, ganaB = 0;
+  let puntosA = 0;
+  let puntosB = 0;
 
-  partidosDirectos.forEach(p => {
-    if (p.equipo1 === a && p.goles1 > p.goles2) ganaA++;
-    else if (p.equipo2 === a && p.goles2 > p.goles1) ganaA++;
-    else if (p.equipo1 === b && p.goles1 > p.goles2) ganaB++;
-    else if (p.equipo2 === b && p.goles2 > p.goles1) ganaB++;
+  enfrentamientos.forEach((r) => {
+    const local = r.equipoLocal;
+    const visitante = r.equipoVisitante;
+    const golesLocal = parseInt(r.golesLocal);
+    const golesVisitante = parseInt(r.golesVisitante);
+
+    if (golesLocal === golesVisitante) {
+      puntosA += 1;
+      puntosB += 1;
+    } else if (
+      (local === equipoA && golesLocal > golesVisitante) ||
+      (visitante === equipoA && golesVisitante > golesLocal)
+    ) {
+      puntosA += 3;
+    } else {
+      puntosB += 3;
+    }
   });
 
-  return ganaB - ganaA;
+  if (puntosA > puntosB) return -1; // A va antes que B
+  if (puntosB > puntosA) return 1;  // B va antes que A
+  return 0; // Empate
 }
 
 function guardarDatos() {
@@ -205,5 +231,6 @@ function mostrarSeccion(id) {
 
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
+
 
 

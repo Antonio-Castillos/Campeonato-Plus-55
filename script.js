@@ -90,7 +90,7 @@ function renderTabla() {
 }
 
 function enfrentamientoDirecto(equipoA, equipoB) {
-  const enfrentamientos = resultados.filter(
+  const enfrentamientos = partidos.filter(
     (r) =>
       (r.equipoLocal === equipoA && r.equipoVisitante === equipoB) ||
       (r.equipoLocal === equipoB && r.equipoVisitante === equipoA)
@@ -136,6 +136,9 @@ function registrarPartido(e) {
   const g2 = parseInt(document.getElementById("goles2").value);
 
   if (eq1 === eq2) return alert("Los equipos deben ser diferentes.");
+  if (!eq1 || !eq2 || isNaN(g1) || isNaN(g2)) {
+  return alert("Debes completar todos los campos correctamente.");
+}
 
   partidos.push({ equipo1: eq1, equipo2: eq2, goles1: g1, goles2: g2 });
 
@@ -232,5 +235,9 @@ function mostrarSeccion(id) {
 // Mostrar sección de inicio al cargar
 mostrarSeccion("inicio");
 
-
-
+function resetearTodo() {
+  if (confirm("¿Estás seguro de reiniciar todo el campeonato?")) {
+    localStorage.clear();
+    location.reload();
+  }
+}

@@ -39,16 +39,18 @@
         <h3>Registrar Resultado</h3>
         <form id="formResultado">
           <label for="equipoLocal">Equipo 1:</label>
-          <select id="equipoLocal" required></select>
-          <input type="number" id="golesLocal" placeholder="Goles" min="0" required />
+          <select id="equipo1" required></select>
+          <input type="number" id="goles1" placeholder="Goles" min="0" required />
 
           <label for="equipoVisitante">Equipo 2:</label>
-          <select id="equipoVisitante" required></select>
-          <input type="number" id="golesVisitante" placeholder="Goles" min="0" required />
+          <select id="equipo2" required></select>
+          <input type="number" id="goles2" placeholder="Goles" min="0" required />
 
           <button type="submit">Registrar</button>
         </form>
       </div>
+
+      <button onclick="resetearTodo()">Resetear Campeonato</button>
 
       <!-- Tabla de posiciones -->
       <div class="card">
@@ -94,6 +96,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

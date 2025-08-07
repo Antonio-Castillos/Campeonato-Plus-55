@@ -236,8 +236,11 @@ function mostrarSeccion(id) {
 mostrarSeccion("inicio");
 
 function resetearTodo() {
-  if (confirm("¿Estás seguro de reiniciar todo el campeonato?")) {
+  const confirmar = confirm("¿Estás seguro de que deseas reiniciar el campeonato? Se borrarán todos los datos.");
+  if (confirmar) {
     localStorage.clear();
     location.reload();
   }
 }
+
+document.getElementById("reiniciarBtn").addEventListener("click", resetearTodo);
